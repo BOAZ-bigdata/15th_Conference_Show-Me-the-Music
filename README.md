@@ -28,6 +28,28 @@
 - 감정 label : 총 4개의 label로 재 라벨링 (0: 기쁨,행복/ 1:분노,불안,당황,놀람/ 2. 슬픔,상처/ 3: 중립)
 
 ### - 감정 분류 (모델 구축 및 학습)
+```
+####미세조정
+n=0
+for name, child in model.named_children():
+    if n==0:
+      h=0
+      for param in child.parameters():
+        if h<=328: #이부분 숫자 조절로 fine-tuning => Roberta229: h=229
+          param.requires_grad = False
+        h+=1
+    n+=1
+#####
+    # print(param)
+model.to(device)
+optimizer = AdaBelief(model.parameters(), lr=1e-5, eps=1e-16, betas=(0.9,0.999), weight_decouple = True, rectify = False)
+
+warmup_ratio = 0.1
+t_total = len(train_dataloader) * NUM_EPOCHS
+warmup_step = int(t_total * warmup_ratio)
+scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_step, num_training_steps=t_total)
+
+```
 ![image](https://user-images.githubusercontent.com/77534419/152346947-cda619b1-651d-49a3-b7aa-af59a675fc63.png)
 - 왜 bert, electra 기반 모델들로 했는지
 - 성능평가 왜 acc, loss / 하이퍼파리미터 튜닝, optimizer등 얘기 넣기
