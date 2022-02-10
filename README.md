@@ -72,11 +72,9 @@ scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_s
 - 추천된 노래를 사용자에게 5점 척도로 평가 받아 가장 점수가 높은 노래와 유사한 노래 5곡씩 재추천
 
 ## 웹
+![웹 예시_사진](https://user-images.githubusercontent.com/73593292/153411640-e6cbefd0-e6ef-454b-87bf-72a7d58bb12b.jpg)
 - NLP와 추천시스템의 모델을 배포하기 위해 웹개발 진행 중
 - HTML, CSS, JavaScript를 이용한 프론트엔드 구상
-    - 사용자의 편의와 모델의 기능을 고려한 UX/UI 디자인
-    - 사용자는 일기를 작성하고 일기의 감정을 확인 가능
-    - 사용자의 노래 감상 취향을 반영
 - Django, Flask를 통해 모델 서빙 진행 중
 
 ## 결론 및 제언
